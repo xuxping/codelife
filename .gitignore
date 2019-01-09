@@ -6,6 +6,7 @@
 *.ko
 *.obj
 *.elf
+*.out
 
 # Linker output
 *.ilk
@@ -50,3 +51,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Python
+*.pyc
+
