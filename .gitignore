@@ -54,4 +54,6 @@ dkms.conf
 
 # Python
 *.pyc
-
+.DS_Store
+.vscode
+.idea
