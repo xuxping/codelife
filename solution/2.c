@@ -1,40 +1,58 @@
+// 两数相加
+// https://leetcode-cn.com/problems/add-two-numbers
+
 #include <stdio.h>
+#include <stdlib.h>
+/**
+ * Definition for singly-linked list.
+ */
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
 
-int lengthOfLongestSubstring(char* s) {
-    if(s == NULL){
-        return 0;
-    }
-    char *p = s;
-    int i = 0, j = 0, start = 0, end = 1, max = 1;
-    int sLen = 0;
-    while(*p++ != '\0'){
-        sLen++;
-        // p++;
-    }
-    printf("s len --> %d\n", sLen);
-    for(i = 1; i < sLen; i++){
-        for(j  = start; j < end; j++){
-            // 有重复
-            if (s[i] == s[j]){
-                printf("start-->%d, end-->%d\n", start,end);
-                start = j + 1;
-                break;
-            }
+/**
+ * 采用两个指针分别指向两个链表的头结点，然后进行计算，
+ * 用carry表示进位数
+ */
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* l3 = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* p3 = l3;
+
+    struct ListNode* p1 = l1;
+    struct ListNode* p2 = l2;
+    int carry = 0;
+
+    while(p1! = NULL || p2! = NULL){
+        int x = (p1 != NULL) ? p1->val :0;
+        int y = (p2 != NULL) ? p2->val :0;
+        int sum  = carry + x + y;
+        // 进位
+        carry = sum / 10;
+        
+        // create new now to store sum
+        struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
+        node->val = sum % 10;
+        node->next = NULL;
+        l3->next = node;
+
+        l3 = node;
+
+        if(p1!=NULL){
+            p1 = p1->next;
         }
-        end = i + 1;
-        if(end - start> max){
-            max = end - start;
+        if(p2!=NULL){
+            p2 = p2->next;
         }
     }
-    return max;
-    
+
+    if(carry > 0){
+        struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
+        node->val = carry;
+        node->next = NULL;
+        l3->next = node;
+    }
+
+    return p3->next;
 }
 
-int main(void){
-    char *s = "abcabcbb";
-   // char *s = "bbbbb";
-   //char *s = "pwwkew";
-   int sLen = lengthOfLongestSubstring(s);
-   printf("max len == %d\n", sLen);
-
-}
