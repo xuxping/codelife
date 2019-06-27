@@ -2,22 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <sys/time.h>
+#include "utils.c"
 
-void display(int *arr, int arrSize)
-{
-    for (int i = 0; i < arrSize; ++i)
-    {
-        printf("%d\t", arr[i]);
-    }
-    printf("\n");
-}
-
-int rand_idx(int start, int end)
-{
-    return rand() % (end + 1 - start) + start;
-}
 
 /**
  * 《算法导论》7.1节的版本
@@ -96,13 +82,7 @@ void quicksort1(int *arr, int l, int r)
     quicksort1(arr, i + 1, r);
 }
 
-unsigned long gettime()
-{
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    unsigned long time_in_micros = 1000 * tv.tv_sec + tv.tv_usec / 1000;
-    return time_in_micros;
-}
+
 
 int main(void)
 {

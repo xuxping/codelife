@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "utils.c"
 
 struct Heap{
      int *heap; // 堆指针
@@ -9,11 +10,6 @@ struct Heap{
      int size; // 队列的长度
 };
 
-// 随机生成start~end之间的数字
-int rand_idx(int start, int end)
-{
-    return rand() % (end + 1 - start) + start;
-}
 
 // 获取父节点
 int parent(i)
@@ -33,14 +29,6 @@ int right(i)
     return 2 * i + 1;
 }
 
-void display(int *heap, int heap_size)
-{
-    for (int i = 0; i < heap_size; i++)
-    {
-        printf("%d\t", heap[i]);
-    }
-    printf("\n");
-}
 
 // 堆平衡
 void max_heapify(struct Heap *h, int i)
