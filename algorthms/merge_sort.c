@@ -17,7 +17,6 @@ void merge_arr(int *arr, int l, int mid, int r)
 
    while (i <= mid && j <= r)
    {
-      // if(arr[i] <= arr[j]){
       if (arr[i] > arr[j])
       {
          tmp[t++] = arr[i++];
