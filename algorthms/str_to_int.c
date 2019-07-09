@@ -17,6 +17,11 @@ int g_nStatus = kValid;
 long long StrToIntCore(char *str, int flag){
     long long num = 0; // 使用long long型，防止整数溢出，程序挂掉
     while(*str != '\0'){
+
+        if (*str == ' '){ //跳过空字符
+            str++;
+            continue;
+        }
         // 只有0-9才可以转化
         if(*str >= '0' && *str <= '9'){
             num = num*10 + flag * (*str - '0');
@@ -46,6 +51,9 @@ int StrToInt(char *str){
     long long num = 0;
     if (str != NULL && *str != '\0'){
         int flag = 1; // 1为正数，-1为负数
+        while(str == ' '){
+            str++;
+        }
 
         if(*str == '+'){
             str++;
