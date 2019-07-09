@@ -7,7 +7,7 @@
 struct Heap{
      int *heap; // 堆指针
      int len; // 数组长度
-     int size; // 队列的长度
+     int size; // 记录heap的初始大小
 };
 
 
@@ -115,11 +115,15 @@ int pop(struct Heap *h)
 
 void push(struct Heap *h, int node)
 {
+
     // 堆满了
     if (h->len == h->size){
         return; 
     }
     printf("push data:%d\n",node);
+    /**
+     * 将数据插入到堆的最后，然后在向上进行平衡
+     */
     h->size += 1;
     int lastIdx = h->size - 1;
     int parentIdx = parent(lastIdx);
@@ -137,40 +141,33 @@ void push(struct Heap *h, int node)
     display(h->heap, h->len);
 }
 
-int main(void)
-{
+void freeHeap(struct Heap *h){
+    if (h != NULL){
+        if (h->heap){
+            free(h->heap);
+        }
+        free(h);
+    }
+
+}
+
+/**
+ * init a heap by hsize
+ */
+struct Heap *initHeap(int hsize){
     struct Heap *h = (struct Heap *)malloc(sizeof(struct Heap));
     if (h == NULL)
     {
         printf("[error] no memory to malloc for heap!");
         exit(-1);
     } 
-    h->len = 10;
+    h->len = hsize;
     h->heap = (int *)malloc(sizeof(int) * h->len);
-    h->size = 10;
+    h->size = 0;
+    
     for (int i = 0; i < h->len; i++)
     {
-        h->heap[i] = rand_idx(0, 20);
+        h->heap[i] = -1;
     }
-    printf("heap size:%d\n",h->size);
-    display(h->heap, h->size);
-
-    buid_max_heap(h);
-
-    headpsort(h);
-
-    buid_max_heap(h);
-
-    int data1 = pop(h);
-
-    int data2 = pop(h);
-
-    push(h, data1);
-    push(h, data2);
-
-    printf("h->size: %d\n", h->size);
-
-    free(h->heap);
-    free(h);
-    return 0;
+    return h;
 }
