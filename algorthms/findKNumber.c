@@ -1,4 +1,5 @@
 // 在数组中找第K小的数
+// 对应 https://leetcode-cn.com/problems/kth-largest-element-in-an-array
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,26 +24,24 @@ int partition(int *arr, int left, int right){
  * T(n) = T(n/2) + O(n), 根据主定理：
  * T(n) = O(n)
  */
-int findKNumberByQuickSort(int *arr, int p, int r, int k){
+int findKNumberByQuickSort(int *arr, int arrSize, int k){
+    if (arr == NULL || arrSize <= 0 || k <= 0 || k > arrSize){
+        return -1;
+    }
+    int p = 0;
+    int r = arrSize - 1;
     int kidx = k - 1; // 数组中索引
-    int size = r + 1;
-    if (p < r){
-        while(p < r){
-            int q = partition(arr, p, r);
-            if (q == kidx){
-                return arr[q];
-            }else if(q < kidx){
-                p = q + 1;
-            }else{
-                r = q - 1;
-            }
-        }
-        if (p == kidx){
-            return arr[p];
+    while(p < r){
+        int q = partition(arr, p, r);
+        if (q == kidx){
+            return arr[q];
+        }else if(q < kidx){
+            p = q + 1;
+        }else{
+            r = q - 1;
         }
     }
-    // 没找到
-    return -1;
+    return arr[p];
 }
 
 // 冒泡排序
@@ -85,7 +84,7 @@ int findKNumberByHeap(int *arr, int arrSize, int k){
 
 
 int main(void){
-    const int arrSize = 10;
+    const int arrSize = 1;
     int *arr = (int *)malloc(sizeof(int) * arrSize);
     if (arr == NULL)
     {
@@ -98,8 +97,8 @@ int main(void){
     }
     display(arr, arrSize);
     
-    const int k = 9;
-    int kNumber = findKNumberByQuickSort(arr, 0, arrSize - 1, k);
+    const int k = 1;
+    int kNumber = findKNumberByQuickSort(arr, arrSize, k);
     printf("quicksort: the %d number is %d\n", k, kNumber);
     kNumber = findKNumberByBubbleSort(arr, arrSize, k);
     printf("bubble sort: the %d number is %d\n", k, kNumber);
