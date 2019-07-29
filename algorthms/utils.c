@@ -1,7 +1,9 @@
 // utils.c
+
 #include <stdio.h>
 #include <time.h>
 #include <sys/time.h>
+
 
 void swap(int *a, int *b){
     int temp = *a;
@@ -30,4 +32,21 @@ unsigned long gettime()
    gettimeofday(&tv, NULL);
    unsigned long time_in_micros = 1000 * tv.tv_sec + tv.tv_usec / 1000;
    return time_in_micros;
+}
+
+/**
+ * 创建随机数组
+ */
+int *createRandomArr(int arrSize){
+   int *arr = (int *)malloc(sizeof(int) * arrSize);
+   if (arr == NULL)
+   {
+      printf("malloc faild, no memory!");
+      exit(-1);
+   }
+   for (int i = 0; i < arrSize; ++i)
+   {
+      arr[i] = rand_idx(0, arrSize);
+   }
+   return arr;
 }
