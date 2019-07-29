@@ -1,7 +1,7 @@
 // 归并排序
 #include <stdio.h>
 #include <stdlib.h>
-#include "utils.c"
+#include "../utils.c"
 
 
 /**
@@ -49,26 +49,14 @@ void merge_sort(int *arr, int l, int r)
    int mid = (l + r) / 2;
    merge_sort(arr, l, mid);
    merge_sort(arr, mid + 1, r);
-
    merge_arr(arr, l, mid, r);
 }
-
 
 
 int main(void)
 {
    const int arrSize = 100;
-
-   int *arr = (int *)malloc(sizeof(int) * arrSize);
-   if (arr == NULL)
-   {
-      printf("malloc faild, no memory!");
-      exit(-1);
-   }
-   for (int i = 0; i < arrSize; ++i)
-   {
-      arr[i] = rand_idx(0, arrSize);
-   }
+   int *arr = createRandomArr(arrSize);
    printf("before sort\n");
    display(arr, arrSize);
 

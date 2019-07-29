@@ -2,14 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "utils.c"
+#include "../utils.c"
 
-
-void swap(int *a, int *b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-}
 
 /**
  * 《算法导论》7.1节的版本
@@ -108,19 +102,7 @@ void quicksort1(int *arr, int l, int r)
 int main(void)
 {
     const int arrSize = 100000;
-
-    int *arr = (int *)malloc(sizeof(int) * arrSize);
-    if (arr == NULL)
-    {
-        printf("malloc faild, no memory!");
-        exit(-1);
-    }
-    for (int i = 0; i < arrSize; ++i)
-    {
-        arr[i] = rand_idx(0, arrSize);
-        // printf("i=%d ", arr[i]);
-    }
-    // printf("\n");
+    int *arr = createRandomArr(arrSize);
 
     unsigned long start_time = gettime();
     // quicksort1(arr, 0, arrSize - 1);

@@ -1,7 +1,7 @@
 // 冒泡排序
 #include <stdio.h>
 #include <stdlib.h>
-#include "utils.c"
+#include "../utils.c"
 
 /**
  * T(n) = O(n^2)
@@ -39,17 +39,8 @@ void bubble_sort(int *arr, int arrSize)
 int main(void)
 {
     const int arrSize = 100;
+    int *arr = createRandomArr(arrSize);
 
-    int *arr = (int *)malloc(sizeof(int) * arrSize);
-    if (arr == NULL)
-    {
-        printf("malloc faild, no memory!");
-        exit(-1);
-    }
-    for (int i = 0; i < arrSize; ++i)
-    {
-        arr[i] = rand_idx(0, arrSize);
-    }
     printf("before sort\n");
     display(arr, arrSize);
 
