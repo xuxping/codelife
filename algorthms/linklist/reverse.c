@@ -7,8 +7,8 @@
  * 将一个单链表反转
  * 借助栈的操作（由于没有实现动态栈的操作，假定链表不会很长）
  */
-struct LinkNode *reverse(struct LinkNode *head){
-    if(head == NULL){
+struct LinkNode *reverseByStack(struct LinkNode *head){
+    if(head == NULL || head->next == NULL){
         return head;
     }
 
@@ -40,6 +40,32 @@ struct LinkNode *reverse(struct LinkNode *head){
 }
 
 /**
+ * 使用指针进行反转
+ */
+struct LinkNode *reverseByPointer(struct LinkNode *head){
+    // 空指针或者只有一个结点
+    if(head == NULL || head->next == NULL){
+        return head;
+    }
+
+    struct LinkNode *p1 = head;
+    struct LinkNode *p2 = head->next;
+    struct LinkNode *tmp = p2->next;
+    
+    p1->next = NULL;
+    while(p2 != NULL){
+        p2->next = p1;
+        p1 = p2;
+        p2 = tmp;
+        if(tmp == NULL){
+            break;
+        }
+        tmp = tmp->next;
+    }
+    return p1;
+}
+
+/**
  * 递归反转打印链表
  */
 void printReverse(struct LinkNode *head){
@@ -49,16 +75,22 @@ void printReverse(struct LinkNode *head){
     }
 }
 
+/**
+ * 测试用例:
+ * 1、空链表、只有一个节点的链表，只有两个节点的链表
+ * 2、大于两个节点的链表
+ */ 
 void testReverse(){
     // 创建一个有环的链表
-    struct LinkNode *head = randomCreate(20);
+    struct LinkNode *head = randomCreate(10);
     printLinkList(head);
     // printf("reverse print\n");
     // printReverse(head);
     // printf("\n");
     // freeLinkList(head);
 
-    struct LinkNode *nhead = reverse(head);
+    // struct LinkNode *nhead = reverseByPointer(head);
+    struct LinkNode *nhead = reverseByStack(head);
     printLinkList(nhead);
 
     freeLinkList(nhead);
