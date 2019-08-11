@@ -65,13 +65,13 @@ int isBracketsMatch(char *str){
     while (*str != '\0'){
         if(isLeftBrackets(*str)){
             stack[++top] = *str;
-        }else if(isRightBrackets(*str) && top >= 0){
-            if(isLeftMatchRight(stack[top], *str)){
+        }else if(isRightBrackets(*str)){
+            if(top >= 0 && isLeftMatchRight(stack[top], *str)){
                 printf("%c - %c\n", stack[top], *str);
                 top--;
             }else{
                 isMatch = 0;
-                break;
+                return isMatch;
             }
         }
         str++;
@@ -85,7 +85,8 @@ int isBracketsMatch(char *str){
 }
 
 int main(void){
-    char *str = "34+[(13*9+44)-(12/3)]";
+    // char *str = "34+[(13*9+44)-(12/3)]";
+    char *str = "34+13*9+44)-(12/3)";
     printf("str: %s\n", str);
 
     if(!isBracketsMatch(str)){
