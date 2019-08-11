@@ -126,7 +126,9 @@ char *longestPalindrome1(char *s)
         ret[idx++] = s[k];
     }
     display(dp, len);
-
+    for (int i = 0; i < len; i++){
+        free(dp[i]);
+    }
     free(dp);
     return ret;
 }

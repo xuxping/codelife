@@ -61,7 +61,6 @@ int StrToInt(char *str){
             str++;
             flag = -1; // 负数
         }
-
         if (*str != '\0'){
             num = StrToIntCore(str, flag);
         }

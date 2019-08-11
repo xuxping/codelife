@@ -5,6 +5,7 @@
 
 /**
  * 算法复杂度为O(n^2)
+ * 可以采用hash表将时间复杂度优化成O(n)
  */
 int lengthOfLongestSubstring(char* s) {
     if(s == NULL){
