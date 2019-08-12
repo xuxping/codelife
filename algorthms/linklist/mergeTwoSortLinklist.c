@@ -1,6 +1,9 @@
-// 合并两个有序链表
+// 合并两个有序链表， 依次实现了下面三种方式
 // 1、开辟新的内存
 // 2、不使用新的内存进行合并
+// 3、使用递归进行合并
+// 刚开始实现的算法可能不够好，逐渐见的多了，思考多了，就有新的方法
+
 
 #include <stdio.h>
 #include "linklist.h"
@@ -126,6 +129,26 @@ struct LinkNode *mergeTwoSortLinkListByLocal(struct LinkNode *head1, struct Link
     return start;
 }
 
+/**
+ * 使用递归的方式进行合并
+ */ 
+struct LinkNode *mergeTwoSortLinkListByRecursive(struct LinkNode *head1, struct LinkNode *head2){
+    if (head1 == NULL) return head2;
+    if (head2 == NULL) return head1;
+
+    struct LinkNode *p = NULL;
+
+    if(head1->val < head2->val){
+        p = head1;
+        p->next = mergeTwoSortLinkListByRecursive(head1->next, head2);
+    }else{
+        p = head2;
+        p->next = mergeTwoSortLinkListByRecursive(head1, head2->next);
+    }
+    return p;
+}
+
+
 void testMergeTwoSortLinkList()
 {
     // 创建两个链表
@@ -155,7 +178,9 @@ void testMergeTwoSortLinkListLocal()
     struct LinkNode *head2 = createLinkList(arr2, 10);
     printLinkList(head2);
 
-    struct LinkNode *newLink = mergeTwoSortLinkListByLocal(head1, head2);
+    // struct LinkNode *newLink = mergeTwoSortLinkListByLocal(head1, head2);
+    struct LinkNode *newLink = mergeTwoSortLinkListByRecursive(head1, head2);
+
     printLinkList(newLink);
 
     freeLinkList(newLink);
