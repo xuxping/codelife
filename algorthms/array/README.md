@@ -5,4 +5,5 @@
 1. `countInversePair`:统计数组中有多少个逆序对  
 2. `merge`: 给定两个数组，进行合并  
 3. `findDuplicate`: 找出数组中任意一个重复的数字  
-4. `findKLargest`: 在数组中找第K小的数  
+4. `findKLargest`: 在数组中找第K小的数   
+5. `MaximumContiguousSubarray`: 求数组的子数组最大累加和
