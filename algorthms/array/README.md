@@ -7,3 +7,4 @@
 3. `findDuplicate`: 找出数组中任意一个重复的数字  
 4. `findKLargest`: 在数组中找第K小的数   
 5. `MaximumContiguousSubarray`: 求数组的子数组最大累加和
+6. `BinarySearch`: 二分查找相关问题   
