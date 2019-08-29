@@ -10,8 +10,10 @@ typedef struct TreeNode{
    struct TreeNode *right; 
 }TreeNode;
 
+// 树的创建
 TreeNode *createTreeNode(char *str, int idx, int len);
 TreeNode *createTree(char *str);
+void destoryTree(TreeNode *root);
 
 // 遍历
 void preOrderWalkRecursion(TreeNode *root);
