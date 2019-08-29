@@ -1,8 +1,7 @@
 // 判断两棵树是否含有相同的子结构 
 
 #include <stdio.h>
-#include "../algorthms/tree/tree.h"
-#include <string.h>
+#include "../algorthms/tree/tree.c"
 
 typedef TreeNode BSTree;
 
@@ -50,6 +49,7 @@ int hasSubTree(BSTree *pRoot1, BSTree *pRoot2){
     return result;
 }
 
+
 void test1(){
     char *str1 = "148#456##7";
     BSTree *pRoot1 = createTree(str1);
@@ -63,20 +63,32 @@ void test1(){
 
     int result = hasSubTree(pRoot1, pRoot2);
     printf("result = %d \n", result);
+
+    destoryTree(pRoot1);
+    pRoot1 = NULL;
+    destoryTree(pRoot2);
+    pRoot1 = NULL;
 }
+
+
 void test2(){
     char *str1 = "148#456##7";
     BSTree *pRoot1 = createTree(str1);
     preOrderWalkRecursion(pRoot1);
     printf("\n");
 
-    char *str2 = "85";
+    char *str2 = "58";
     BSTree *pRoot2 = createTree(str2);
     preOrderWalkRecursion(pRoot2);
     printf("\n");
 
     int result = hasSubTree(pRoot1, pRoot2);
     printf("result = %d \n", result);
+
+    destoryTree(pRoot1);
+    pRoot1 = NULL;
+    destoryTree(pRoot2);
+    pRoot1 = NULL;
 }
 
 
