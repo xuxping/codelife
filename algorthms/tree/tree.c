@@ -8,19 +8,21 @@
 #include "string.h"
 #include "tree.h"
 
-TreeNode *createTreeNode(char *str, int idx, int len){
+TreeNode *createTreeNode(char *str, int idx, int len, TreeNode *pParent){
     TreeNode *pRoot = NULL;
     if(idx < len && str[idx] != '#'){
         pRoot = (TreeNode *)malloc(sizeof(TreeNode));
         pRoot->val = str[idx] - '0';
-        pRoot->left = createTreeNode(str, 2 * idx + 1, len);
-        pRoot->right = createTreeNode(str, 2 * idx + 2, len);
+        pRoot->parent = pParent;
+        pRoot->left = createTreeNode(str, 2 * idx + 1, len, pRoot);
+        pRoot->right = createTreeNode(str, 2 * idx + 2, len, pRoot);
     }
     return pRoot;
 }
 
 
 /**
+ * 输入的字符串中应该不含有重复的字符，除了特殊符号#
  * input: 148#456##7
  *           1
  *       4      8
@@ -31,7 +33,7 @@ TreeNode *createTree(char *str){
     if (str == NULL || *str == '\0'){
         return NULL;
     }
-    TreeNode *pRoot = createTreeNode(str, 0, strlen(str));
+    TreeNode *pRoot = createTreeNode(str, 0, strlen(str), NULL);
     return pRoot;
 }
 
@@ -184,3 +186,24 @@ void lastOrderWalk(TreeNode *root){
         p = stack[top];
     }
 }
+
+/**
+ * 假设val值唯一
+ */ 
+TreeNode *getNodeByVal(TreeNode *root, int val){
+    TreeNode *p = root;
+
+    if (p != NULL)
+    {
+        if(root->val == val){
+            return p;
+        }
+        p = getNodeByVal(p->left, val);
+        if (p == NULL || p->val != val){
+            p = getNodeByVal(root->right, val);
+        }
+    }
+    return p;
+}
+
+
