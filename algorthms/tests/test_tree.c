@@ -58,14 +58,53 @@ void test_lastOrderWalk(){
     printf("\n");
 }
 
+void test_getNodePathByVal(){
+    char *str = "148#956##7";
+    TreeNode *pRoot = createTree(str);
+    TreeNode *node = getNodeByVal(pRoot, 7);
+    printf("find node: %d\n", node->val);
+    
+    destoryTree(pRoot);
+    pRoot = NULL;
+    printf("\n");
+}
+
+/**
+ * input: 148#956##7
+ *           1
+ *       4      8
+ *     #   9  5   6
+ *   #  # 7
+ */ 
+void test_getNodePath(){
+    char *str = "148#956##7";
+    TreeNode *pRoot = createTree(str);
+    TreeNode *node = getNodeByVal(pRoot, 7);
+    printf("find node: %d\n", node->val);
+
+    TreeStack *treeStack = getNodePath(pRoot, node);
+    while(treeStack->top >= 0){
+        TreeNode *pNode = &treeStack->stack[treeStack->top];
+        printf("%d\n", pNode->val);
+        --treeStack->top;
+    }
+    free(treeStack->stack);
+    treeStack->stack=NULL;
+    free(treeStack);
+    treeStack = NULL;
+    destoryTree(pRoot);
+    pRoot = NULL;
+}
+
 
 int main(void){
     // test_preOrderWalkRecursion();
     // test_preOrderWalk();
     // test_inorderTreeWalkRecursion();
     // test_inOrderWalk();
-    
-    test_lastOrderWalkRecursion();
-    test_lastOrderWalk();
+    // test_lastOrderWalkRecursion();
+    // test_lastOrderWalk();
+    // test_getNodePath();
+    test_getNodePathByVal();
     return 0;
 }

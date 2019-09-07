@@ -192,7 +192,7 @@ void lastOrderWalk(TreeNode *root){
  */ 
 TreeNode *getNodeByVal(TreeNode *root, int val){
     TreeNode *p = root;
-
+    
     if (p != NULL)
     {
         if(root->val == val){
@@ -206,4 +206,35 @@ TreeNode *getNodeByVal(TreeNode *root, int val){
     return p;
 }
 
+// 判断是否存在路径，存在则加入到栈中
+int hasNodePath(TreeNode *root, TreeNode *node, TreeStack *treeStack){
+    if (root == NULL || node == NULL || treeStack == NULL) return 0;
+    if(treeStack->top >= treeStack->len){
+        printf("err: stack overflow!");
+        exit(-1);
+    }
+    treeStack->stack[++treeStack->top] = *root;
 
+    if(root == node){
+        return 1;
+    }
+    if(hasNodePath(root->left, node, treeStack) || 
+        hasNodePath(root->right, node, treeStack)){
+        return 1;
+    }
+    treeStack->top--;
+
+    return 0;
+}
+
+TreeStack *getNodePath(TreeNode *root, TreeNode *node){
+    const int len = 20;
+    TreeStack *treeStack = (TreeStack *)malloc(sizeof(TreeStack));
+    // initialize 
+    treeStack->stack = (TreeNode *)malloc(sizeof(TreeNode)*len);
+    treeStack->top = -1;
+    treeStack->len = len;
+    int res = hasNodePath(root, node, treeStack);
+
+    return treeStack;
+}
