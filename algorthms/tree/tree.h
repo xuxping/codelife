@@ -29,7 +29,7 @@ void lastOrderWalk(TreeNode *root);
 TreeNode *getNodeByVal(TreeNode *root, int val);
 
 typedef struct TreeStack{
-   TreeNode *stack;
+   TreeNode **stack;
    int top;
    int len;
 }TreeStack;

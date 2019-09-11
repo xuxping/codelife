@@ -213,7 +213,7 @@ int hasNodePath(TreeNode *root, TreeNode *node, TreeStack *treeStack){
         printf("err: stack overflow!");
         exit(-1);
     }
-    treeStack->stack[++treeStack->top] = *root;
+    treeStack->stack[++treeStack->top] = root;
 
     if(root == node){
         return 1;
@@ -227,11 +227,12 @@ int hasNodePath(TreeNode *root, TreeNode *node, TreeStack *treeStack){
     return 0;
 }
 
+
 TreeStack *getNodePath(TreeNode *root, TreeNode *node){
     const int len = 20;
     TreeStack *treeStack = (TreeStack *)malloc(sizeof(TreeStack));
     // initialize 
-    treeStack->stack = (TreeNode *)malloc(sizeof(TreeNode)*len);
+    treeStack->stack = (TreeNode **)malloc(sizeof(TreeNode *)*len);
     treeStack->top = -1;
     treeStack->len = len;
     int res = hasNodePath(root, node, treeStack);

@@ -86,7 +86,7 @@ void test_getNodePath(){
 
     TreeStack *treeStack = getNodePath(pRoot, node);
     while(treeStack->top >= 0){
-        TreeNode *pNode = &treeStack->stack[treeStack->top];
+        TreeNode *pNode = treeStack->stack[treeStack->top];
         printf("%d\n", pNode->val);
         --treeStack->top;
     }
@@ -106,7 +106,7 @@ int main(void){
     // test_inOrderWalk();
     // test_lastOrderWalkRecursion();
     // test_lastOrderWalk();
-    // test_getNodePath();
-    test_getNodePathByVal();
+    test_getNodePath();
+    // test_getNodePathByVal();
     return 0;
 }
