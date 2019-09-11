@@ -62,7 +62,9 @@ void test_getNodePathByVal(){
     char *str = "148#956##7";
     TreeNode *pRoot = createTree(str);
     TreeNode *node = getNodeByVal(pRoot, 7);
-    printf("find node: %d\n", node->val);
+    if(node != NULL){
+        printf("find node: %d\n", node->val);
+    }
     
     destoryTree(pRoot);
     pRoot = NULL;
