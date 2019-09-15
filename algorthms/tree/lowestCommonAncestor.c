@@ -106,21 +106,46 @@ TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q){
 }
 
 
-void test_lowestCommonAncestorByParent(){
-    char *str = "148#956##7";
-    TreeNode *pRoot = createTree(str);
-    TreeNode *node1 = getNodeByVal(pRoot, 7);
-    TreeNode *node2 = getNodeByVal(pRoot, 6);
-    TreeNode *pCommonAncestor = lowestCommonAncestorByParent(pRoot,node1, node2);
-
-    if(pCommonAncestor != NULL){
-        printf("pCommonAncestor->val: %d", pCommonAncestor->val);
+/**
+ * 对应与3.2
+ * @param root:根节点
+ * @param p: 给定第一个结点
+ * @param q: 给定第二个结点
+ */
+TreeNode *lowestCommonAncestorByStack(TreeNode *root, TreeNode *p, TreeNode *q){
+    if (root == NULL || p == NULL || q == NULL){
+        return NULL;
     }
+    TreeStack *pTreeStack = getNodePath(root, p);
+    TreeStack *qTreeStack = getNodePath(root, q);
 
-    destoryTree(pRoot);
-    pRoot = NULL;
-    printf("\n");
+    /**
+     * 这里由于TreeStack的存储顺序是从节点到根节点的路径，因此需要破坏栈的定义了
+     */
+    int index = 0;
+    while (pTreeStack->stack[index] == qTreeStack->stack[index]){
+        ++index;
+        if (index <= pTreeStack->top && index <= qTreeStack->top){
+            continue;
+        }
+        break;
+    }
+    --index;
+    TreeNode *lowestCommonNode = pTreeStack->stack[index];
+
+    // free stack 
+    free(pTreeStack->stack);
+    pTreeStack->stack=NULL;
+    free(pTreeStack);
+    pTreeStack = NULL;
+    free(qTreeStack->stack);
+    qTreeStack->stack=NULL;
+    free(qTreeStack);
+    qTreeStack = NULL;
+
+    return lowestCommonNode;
 }
+
 
 void test_lowestCommonAncestor(){
     char *str = "148#956##7";
@@ -128,9 +153,16 @@ void test_lowestCommonAncestor(){
     TreeNode *node1 = getNodeByVal(pRoot, 7);
     TreeNode *node2 = getNodeByVal(pRoot, 6);
     TreeNode *pCommonAncestor = lowestCommonAncestor(pRoot,node1, node2);
-
+    TreeNode *pCommonAncestorByParent = lowestCommonAncestorByParent(pRoot,node1, node2);
+    if(pCommonAncestorByParent != NULL){
+        printf("pCommonAncestorByParent->val: %d\n", pCommonAncestorByParent->val);
+    }
     if(pCommonAncestor != NULL){
-        printf("pCommonAncestor->val: %d", pCommonAncestor->val);
+        printf("pCommonAncestor->val: %d\n", pCommonAncestor->val);
+    }
+    TreeNode *pCommonAncestorByStack = lowestCommonAncestorByStack(pRoot,node1, node2);
+    if(pCommonAncestorByStack != NULL){
+        printf("pCommonAncestorByStack->val: %d\n", pCommonAncestorByStack->val);
     }
 
     destoryTree(pRoot);
@@ -138,8 +170,10 @@ void test_lowestCommonAncestor(){
     printf("\n");
 }
 
+
+
+
 int main(void){
-    test_lowestCommonAncestorByParent();
     test_lowestCommonAncestor();
     return 0;
 }
