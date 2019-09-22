@@ -133,3 +133,43 @@ BSTree *TreePreSuccessor(BSTree *x)
     }
     return p;
 }
+
+
+/**
+ * 将一个新值插入到树中
+ * 考虑树为空的情况
+ */
+void TreeInsert(BSTree *root, BSTree *node)
+{
+    BSTree *p = root;
+    BSTree *p1 = root;
+    int key = node->val;
+    // 找到要插入的点
+    while (p != NULL)
+    {
+        p1 = p;
+        if (key > p->val)
+        {
+            p = p->right;
+        }
+        else
+        {
+            p = p->left;
+        }
+    }
+    node->parent = p1;
+
+    // 树为空
+    if (p1 == NULL)
+    {
+        root = node;
+    }
+    else if (key > p1->val)
+    {
+        p1->right = node;
+    }
+    else
+    {
+        p1->left = node;
+    }
+}

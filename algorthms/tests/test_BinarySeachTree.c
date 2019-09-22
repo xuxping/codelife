@@ -29,6 +29,15 @@ void test_BinarySearchTree(){
     // max Node->val: 9
     // min succNode->val: 3
     // max preNode->val: 8
+
+    // insert a new node
+    inOrderWalk(pRoot);
+    printf("\n");
+    BSTree *node = (BSTree *)malloc(sizeof(BSTree));
+    node->val = 10;
+    node->left = node->right = node->parent = NULL;
+    TreeInsert(pRoot, node);
+    inOrderWalk(pRoot);
     
     destoryTree(pRoot);
     pRoot = NULL;
