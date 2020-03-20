@@ -7,7 +7,7 @@ def swap(a, b):
 
 def rotate(matrix):
     rowLen, colLen = len(matrix), len(matrix[0])
-    last = rowLen-1;
+    last = rowLen-1
     level = 0
     while(level < rowLen/2):
         for i in range(level, last):
@@ -15,7 +15,7 @@ def rotate(matrix):
             matrix[level][i], matrix[last][last-i+level] = matrix[last][last-i+level], matrix[level][i]
             matrix[level][i], matrix[last-i+level][level] = matrix[last-i+level][level], matrix[level][i]
             
-        level += 1;
+        level += 1
         last -= 1
 
 
