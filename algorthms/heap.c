@@ -4,7 +4,6 @@
  * 最大堆：除了根以外的所有节点都满足，某个节点的值小于等于其父节点，根节点是最大的；
  * 最小堆：除了根以外的所有节点都满足，某个节点的值大于等于其父节点，根节点是最小的
  * 
- * 
  **/
 
 
@@ -77,7 +76,7 @@ void buid_max_heap(struct Heap *h)
 {
     printf("build max heap\n");
     h->size = h->len;
-    // 从下往上构建堆
+    // 从下往上构建堆，从数组中间开始
     for (int i = h->size / 2; i >= 0; i--)
     {
         max_heapify(h, i);
@@ -85,7 +84,7 @@ void buid_max_heap(struct Heap *h)
     display(h->heap, h->len);
 }
 
-// 堆排序 O(lgn)
+// 堆排序 O(nlgn)
 void headpsort(struct Heap *h)
 {
     // buid_max_heap(h);

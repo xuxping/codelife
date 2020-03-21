@@ -40,7 +40,8 @@ extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.viewcode',
               'sphinx.ext.napoleon',
               'sphinx_rtd_theme',
-              'recommonmark'
+              'recommonmark',
+              'sphinx_markdown_tables',
               ]
 
 napoleon_google_docstring = True
