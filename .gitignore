@@ -57,3 +57,4 @@ dkms.conf
 .DS_Store
 .vscode
 .idea
+docs/build

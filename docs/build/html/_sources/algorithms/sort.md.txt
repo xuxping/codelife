@@ -1,10 +1,11 @@
-# 排序算法篇   
+# 排序算法   
 
 **实现的主要算法如下**    
 1. 冒泡排序：`algorithms/sort/bubble_sort`   
 2. 插入排序：`algorithms/sort/insert_sort`   
 3. 归并排序：`algorithms/sort/merge_sort`   
 4. 快速排序：`algorithms/sort/quick_sort`   
+5. 堆排：`algorithms/heap`   
 
 **如何分析一个排序算法？**
 - 执行效率
@@ -25,6 +26,7 @@
 | 选择 | O(n)、O(n^2)、O(n^2) | O(1) | 不稳定 |
 | 快排 | O(n)、O(n^2)、O(nlogn) | O(1) | 不稳定|
 | 归并 | O(nlogn)、O(nlogn)、O(nlogn) | O(nlogn) | 稳定|
+| 堆排 | O(nlogn)、O(nlogn)、O(nlogn) | O(1) | 不稳定|
 
 **参考**
 https://time.geekbang.org/column/article/41802   
