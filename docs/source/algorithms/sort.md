@@ -6,6 +6,7 @@
 3. 归并排序：`algorithms/sort/merge_sort`   
 4. 快速排序：`algorithms/sort/quick_sort`   
 5. 堆排序：`algorithms/heap`   
+4. 选择排序：`algorithms/sort/select_sort`   
 
 **如何分析一个排序算法？**
 - 执行效率
