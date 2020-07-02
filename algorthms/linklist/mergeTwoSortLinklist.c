@@ -86,45 +86,34 @@ struct LinkNode *mergeTwoSortLinkList(struct LinkNode *head1, struct LinkNode *h
 /**
  * 不使用新的内存进行合并
  */ 
-struct LinkNode *mergeTwoSortLinkListByLocal(struct LinkNode *head1, struct LinkNode *head2){
-    if (head1 == NULL) return head2;
-    if (head2 == NULL) return head1;
+struct LinkNode *mergeTwoSortLinkListByLocal(struct LinkNode *l1, struct LinkNode *l2){
+    if (l1 == NULL) return l2;
+    if (l2 == NULL) return l1;
 
-    struct LinkNode *p1 = head1;
-    struct LinkNode *p2 = head2;
-    struct LinkNode *start = head1;
+    struct LinkNode *start = NULL;
     // 确定起始节点
-    if (p1->val > p2->val){
-        start = head2;
-        p2 = start->next;
+    if (l1->val <= l2->val){
+        start = l1;
+        l1 = l1->next;
     }else{
-        p1 = start->next;
+        start = l2;
+        l2 = l2->next;
     }
 
     struct LinkNode *p3 = start;
 
-    while(p1 != NULL && p2 != NULL){
-        if(p1->val < p2->val){
-            p3->next = p1;
-            p1 = p1->next;
+    while(l1 != NULL && l1 != NULL){
+        if(l1->val <= l2->val){
+            p3->next = l1;
+            l1 = l1->next;
         }else{
-            p3->next = p2;
-            p2 = p2->next;
+            p3->next = l2;
+            l2 = l2->next;
         }
         p3 = p3->next;
     }
 
-    while(p1 != NULL){
-        p3->next = p1;
-        p1 = p1->next;
-        p3 = p3->next;
-    }
-
-    while(p2 != NULL){
-        p3->next = p2;
-        p2 = p2->next;
-        p3 = p3->next;
-    }
+    p3->next = l1 ? l1: l2;
 
     return start;
 }
