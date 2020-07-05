@@ -7,45 +7,38 @@ int myAtoi(char* str) {
     if (str == NULL || *str == '\0'){
         return 0;
     }
-    int sign = 1;
-    long long num = 0;
-    // const int INT_MAX = ~(unsigned int)0/2;
-    // const int INT_MIN = ~(unsigned int)0/2 + 1;
-    int set_sign = 0; // 是否设置过正负
-    int find_num = 0; //是否找到有效字符（+，-，1-9）
-    // atoi
-    while(*str != '\0'){
-        if (*str == '+' && !set_sign && !find_num){
-            ++str;
-            set_sign = 1;
-            find_num = 1;
-            continue;
-        }
-        if (*str == '-' && !set_sign && !find_num){
-            ++str;
-            sign = -1;
-            find_num = 1;
-            set_sign = 1;
-            continue;
-        }
-        if(*str == ' ' && !find_num){
-            ++str;
-            continue;
-        }
-        // 非法字符
-        if (!(*str >= '0' && *str <= '9')){
-            break;
-        }
+    int INT_MAX = (~(unsigned int)0)/2;
+    int INT_MIN = (~(unsigned int)0)/2 + 1;
+    int flag = 1;
+    while (*str == ' ') str++;
 
-        num = num * 10 + (*str - '0');
-        find_num = 1;
-        if(sign > 0 && num > INT_MAX){
-            return INT_MAX;
-        }
-        if(sign < 0 && sign * num < INT_MIN){
-            return INT_MIN;
-        }
+    if(*str == '+'){
+        flag = 1;
         str++;
     }
-    return sign * num;
+    if(*str == '-'){
+        flag = -1;
+        str++;
+    }
+    int num = 0;
+    while (*str != '\0')
+    {
+        int n = *str - '0';
+
+        if(n < 0 || n > 9) break;
+
+        if(n > INT_MAX / 10 || (n == INT_MAX / 10 && n > 7)){
+            return flag > 0 ? INT_MAX : INT_MIN;
+        }
+        num = num * 10 + n;
+        str++;
+    }
+    printf("===%d\n",num);
+    return flag * num;
+}
+
+int main(int argc, char const *argv[])
+{
+    printf("=== %d \n", myAtoi("-204043wwe"));
+    return 0;
 }
