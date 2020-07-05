@@ -50,17 +50,14 @@ struct LinkNode *reverseByPointer(struct LinkNode *head){
 
     struct LinkNode *p1 = head;
     struct LinkNode *p2 = head->next;
-    struct LinkNode *tmp = p2->next; // 记录断链后面的起始节点
+    struct LinkNode *tmp = NULL; // 记录断链后面的起始节点
     
     p1->next = NULL;
     while(p2 != NULL){
+        tmp = p2->next;
         p2->next = p1;
         p1 = p2;
         p2 = tmp;
-        if(tmp == NULL){
-            break;
-        }
-        tmp = tmp->next;
     }
     return p1;
 }
