@@ -6,6 +6,7 @@
 
 /**
  * T(n) = O(n^2)
+ * 比较+移动
  */
 void insert_sort(int *arr, int arrSize)
 {
