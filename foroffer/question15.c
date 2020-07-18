@@ -37,10 +37,13 @@ int numberOfOne1(int n)
     return count;
 }
 
+/**
+ * 不断把数字最后一个 1 反转，并把count加一,当数字变成 0 的时候,它没有 1 的位了，此时返回答案
+ **/ 
 int numberOfOne2(int n)
 {
     int count = 0;
-    while (n)
+    while (n != 0)
     {
         ++count;
         n = (n - 1) & n;

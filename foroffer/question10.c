@@ -33,6 +33,7 @@ long long fabonacci(unsigned int n){
 
 
 // 动态规划法 DP[i] = DP[i-1]+DP[i-2]
+// 防止重复进行计算
 long long fabonacciDP(unsigned int n){
     int dp[n + 1];
 
@@ -51,7 +52,7 @@ long long fabonacciDP(unsigned int n){
  * 循环解法和DP解法可以参考fabonacci
  */ 
 long long jump(unsigned int n){
-    if (n <= 0) return 0;
+    if (n <= 0) return 1;
     if (n == 1) return 1;
     if (n == 2) return 2;
 

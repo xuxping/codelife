@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "../utils.c"
 
+// 定义一个链表节点
 struct LinkNode{
     int val;
     struct LinkNode *next;

@@ -1,5 +1,7 @@
 // 删除链表的节点
 // 给定单链表的头指针和一个节点指针，在O(1)时间内删除该链表节点
+// 给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。
+// 返回删除后的链表的头节点。
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,6 +31,7 @@ void deleteNode(struct  LinkNode **pHead, struct  LinkNode *pDeleteNode){
         pHead = NULL;
         pDeleteNode = NULL;
     }else{
+        // 尾结点
         while(p->next != pDeleteNode){
             p = p->next;
         }
@@ -83,6 +86,25 @@ void delelteDuplication(struct LinkNode **pHead){
         }
     }
 
+}
+
+struct LinkNode* deleteNode(struct LinkNode* head, int val){
+    if(head == NULL) return NULL;
+    struct LinkNode* p = head;
+
+    // 头结点
+    if(head->val == val){
+        return head->next;
+    }
+    // 找到该节点
+    while(p->next != NULL && p->next->val != val ){
+        p = p->next;
+    }
+    // 找到该节点
+    if(p->next != NULL){
+        p->next = p->next->next;
+    }
+    return head;
 }
 
 void test_deleteNode(){
