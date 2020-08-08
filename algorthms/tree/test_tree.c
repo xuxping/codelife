@@ -1,7 +1,7 @@
 // test tree algorithms
+#include "tree.h"
 
 #include <stdio.h>
-#include "../tree/tree.c"
 #include "../utils.c"
 
 void test_preOrderWalkRecursion(){
@@ -98,6 +98,17 @@ void test_getNodePath(){
     pRoot = NULL;
 }
 
+void test_getTreeHeight(){
+    char *str = "148#956##7";
+    TreeNode *pRoot = createTree(str);
+    int height = getTreeHeight(pRoot);
+    printf("height => %d\n", height);
+
+    destoryTree(pRoot);
+    pRoot = NULL;
+}
+
+
 
 int main(void){
     // test_preOrderWalkRecursion();
@@ -106,7 +117,8 @@ int main(void){
     // test_inOrderWalk();
     // test_lastOrderWalkRecursion();
     // test_lastOrderWalk();
-    test_getNodePath();
+    // test_getNodePath();
+    test_getTreeHeight();
     // test_getNodePathByVal();
     return 0;
 }
