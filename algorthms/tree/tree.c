@@ -62,6 +62,9 @@ void preOrderWalkRecursion(TreeNode *root){
 }
 
 
+/**
+ * 前序遍历
+ **/ 
 void preOrderWalk(TreeNode *root){
     if (root == NULL) return;
     TreeNode *stack[100];
@@ -238,4 +241,14 @@ TreeStack *getNodePath(TreeNode *root, TreeNode *node){
     int res = hasNodePath(root, node, treeStack);
 
     return treeStack;
+}
+
+// 获取树的高度
+int getTreeHeight(TreeNode *root){
+    if (root == NULL) return 0;
+    int leftHeight = getTreeHeight(root->left);
+    int rightHeight = getTreeHeight(root->right);
+
+    int max = leftHeight > rightHeight ? leftHeight + 1 :rightHeight + 1;
+    return max;
 }
