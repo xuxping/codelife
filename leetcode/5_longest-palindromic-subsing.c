@@ -14,6 +14,7 @@ Output:
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 
 /**
@@ -62,8 +63,7 @@ char *longestPalindrome1(char *s)
 {
     if (s == NULL)
         return NULL;
-
-    const int len = getstrlen(s);
+    const int len = strlen(s);
 
     // int dp[len][len];
     // 使用二维指针便于传递二维数组
@@ -133,6 +133,9 @@ char *longestPalindrome1(char *s)
     return ret;
 }
 
+
+
+
 /**
  * 中心扩散法
  */
@@ -157,7 +160,7 @@ char *longestPalindrome2(char *s)
     if (s == NULL)
         return NULL;
 
-    const int len = getstrlen(s);
+    const int len = strlen(s);
 
     int longest = 1;
     int start = 0, end = 0;

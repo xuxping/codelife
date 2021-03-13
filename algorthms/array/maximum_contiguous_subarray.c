@@ -1,5 +1,5 @@
 /**
-求数组的子数组最大累加和.
+求数组的子数组最大累加和.MaximumContiguousSubarray
 test size:1000
 ------------------------------
 algorithm1-->

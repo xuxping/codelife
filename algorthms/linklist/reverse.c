@@ -7,15 +7,15 @@
  * 将一个单链表反转
  * 借助栈的操作（由于没有实现动态栈的操作，假定链表不会很长）
  */
-struct LinkNode *reverseByStack(struct LinkNode *head){
+LinkList *reverseByStack(LinkList *head){
     if(head == NULL || head->next == NULL){
         return head;
     }
 
-    struct LinkNode *p = head;
+    LinkList *p = head;
     // note: 分配的存放指针的数组
     const int SIZE = getSizeOfLinklist(p);
-    struct LinkNode *stack[SIZE];
+    LinkList *stack[SIZE];
     int top = -1;
     // 进栈
     while(p != NULL){
@@ -25,8 +25,8 @@ struct LinkNode *reverseByStack(struct LinkNode *head){
     }
 
     // 出栈
-    struct LinkNode *nhead = stack[top];
-    struct LinkNode *p1 = nhead;
+    LinkList *nhead = stack[top];
+    LinkList *p1 = nhead;
     p1->next = NULL;
     top--;
     while(top >= 0){
@@ -42,15 +42,15 @@ struct LinkNode *reverseByStack(struct LinkNode *head){
 /**
  * 使用指针进行反转
  */
-struct LinkNode *reverseByPointer(struct LinkNode *head){
+LinkList *reverseByPointer(LinkList *head){
     // 空指针或者只有一个结点
     if(head == NULL || head->next == NULL){
         return head;
     }
 
-    struct LinkNode *p1 = head;
-    struct LinkNode *p2 = head->next;
-    struct LinkNode *tmp = NULL; // 记录断链后面的起始节点
+    LinkList *p1 = head;
+    LinkList *p2 = head->next;
+    LinkList *tmp = NULL; // 记录断链后面的起始节点
     
     p1->next = NULL;
     while(p2 != NULL){
@@ -65,7 +65,7 @@ struct LinkNode *reverseByPointer(struct LinkNode *head){
 /**
  * 递归反转打印链表
  */
-void printReverse(struct LinkNode *head){
+void printReverse(LinkList *head){
     if (head != NULL){
         printReverse(head->next);
         printf("%d\t", head->val);
@@ -79,15 +79,15 @@ void printReverse(struct LinkNode *head){
  */ 
 void testReverse(){
     // 创建一个有环的链表
-    struct LinkNode *head = randomCreate(10);
+    LinkList *head = randomCreate(10);
     printLinkList(head);
     // printf("reverse print\n");
     // printReverse(head);
     // printf("\n");
     // freeLinkList(head);
 
-    // struct LinkNode *nhead = reverseByPointer(head);
-    struct LinkNode *nhead = reverseByStack(head);
+    // LinkList *nhead = reverseByPointer(head);
+    LinkList *nhead = reverseByStack(head);
     printLinkList(nhead);
 
     freeLinkList(nhead);

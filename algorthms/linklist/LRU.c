@@ -11,7 +11,7 @@
 #include<stdlib.h>
 #include "linklist.h"
 
-int LRU(struct LinkNode *head, struct LinkNode *iNode, int cacheSize){
+int LRU(LinkList *head, LinkList *iNode, int cacheSize){
     if(iNode == NULL) return -1;
 
     // 1、链表为空
@@ -23,8 +23,8 @@ int LRU(struct LinkNode *head, struct LinkNode *iNode, int cacheSize){
 
     // 2、链表至少有一个节点
     int linkSize = 0;
-    struct LinkNode *p = head->next;
-    struct LinkNode *prev = head;
+    LinkList *p = head->next;
+    LinkList *prev = head;
     //
     while (p->val != iNode->val)
     {
@@ -50,7 +50,7 @@ int LRU(struct LinkNode *head, struct LinkNode *iNode, int cacheSize){
         head->next = iNode;
         return 3;
     }
-    struct LinkNode *pprev = head;
+    LinkList *pprev = head;
     while (pprev->next != prev)
     {
         pprev = pprev->next;
@@ -65,10 +65,10 @@ int LRU(struct LinkNode *head, struct LinkNode *iNode, int cacheSize){
 int main(int argc, char const *argv[])
 {
     // 设置一个head节点方便后续操作
-    struct LinkNode *head = (struct LinkNode *)malloc(sizeof(struct LinkNode));
+    LinkList *head = (LinkList *)malloc(sizeof(LinkList));
     head->next = randomCreate(10);
     printLinkList(head->next);
-    struct LinkNode *iNode = (struct LinkNode *)malloc(sizeof(struct LinkNode));
+    LinkList *iNode = (LinkList *)malloc(sizeof(LinkList));
     iNode->next = NULL;
     iNode->val = 20;
 

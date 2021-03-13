@@ -17,15 +17,15 @@
  *     在第二次遍历的时候，在较长的链表上先走若干步，接着同时在两个链表上遍历，找到的第一个相同
  *     的结点就是他们的第一个公共结点。
  */
-struct LinkNode *lowestCommonAncestor(struct LinkNode *p, struct LinkNode *q){
+LinkList *lowestCommonAncestor(LinkList *p, LinkList *q){
     if (p == NULL || q == NULL){
         return NULL;
     }
 
     int lenOfp = 0;
     int lenOfq = 0;
-    struct LinkNode *phead = p;
-    struct LinkNode *qhead = q;
+    LinkList *phead = p;
+    LinkList *qhead = q;
     
     // 遍历找到每个链表的长度
     while(phead != NULL){
@@ -49,7 +49,7 @@ struct LinkNode *lowestCommonAncestor(struct LinkNode *p, struct LinkNode *q){
             step--;
         }
     }
-    struct LinkNode *lowestCommonNode = NULL;
+    LinkList *lowestCommonNode = NULL;
     // 找到第一个公共子节点
     while(p != NULL && q != NULL){
         if(p != q){
@@ -67,17 +67,17 @@ struct LinkNode *lowestCommonAncestor(struct LinkNode *p, struct LinkNode *q){
 
 void testLowestCommonAncestor(){
     // 创建两个链表
-    struct LinkNode *phead = randomCreate(5);
+    LinkList *phead = randomCreate(5);
     printLinkList(phead);
-    struct LinkNode *qhead = randomCreate(10);
+    LinkList *qhead = randomCreate(10);
     printLinkList(qhead);
 
     // 将第一个链表最后一个元素指向第二个链表中的某一个元素
-    struct LinkNode *p = phead;
+    LinkList *p = phead;
     while(p->next != NULL){
         p = p->next;
     }
-    struct LinkNode *q = qhead;
+    LinkList *q = qhead;
     int i = 4;
     while(q->next != NULL && i > 0){
         q = q->next;
@@ -86,7 +86,7 @@ void testLowestCommonAncestor(){
     p->next = q;
 
     
-    struct LinkNode *lowestCommonNode = lowestCommonAncestor(phead, qhead);
+    LinkList *lowestCommonNode = lowestCommonAncestor(phead, qhead);
     if (lowestCommonNode != NULL){
         printf("has cross in two linklist: %d\n", lowestCommonNode->val);
     }else{

@@ -22,10 +22,9 @@
 
 
 // 最大堆的实现和堆排序
-
+#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "utils.c"
 
 
 // 堆一般采用数组来实现，原地处理

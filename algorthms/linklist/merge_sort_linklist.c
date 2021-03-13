@@ -11,19 +11,19 @@
 /**
  * 开辟新的内存
  */ 
-struct LinkNode *mergeTwoSortLinkList(struct LinkNode *head1, struct LinkNode *head2)
+LinkList *mergeTwoSortLinkList(LinkList *head1, LinkList *head2)
 {
     if (head1 == NULL) return head2;
     if (head2 == NULL) return head1;
 
-    struct LinkNode *p1 = head1;
-    struct LinkNode *p2 = head2;
-    struct LinkNode *newLink = NULL;
-    struct LinkNode *p3 = NULL;
+    LinkList *p1 = head1;
+    LinkList *p2 = head2;
+    LinkList *newLink = NULL;
+    LinkList *p3 = NULL;
 
     while (p1 != NULL && p2 != NULL)
     {
-        struct LinkNode *node = (struct LinkNode *)malloc(sizeof(struct LinkNode));
+        LinkList *node = (LinkList *)malloc(sizeof(LinkList));
         if (node == NULL)
         {
             return NULL;
@@ -55,7 +55,7 @@ struct LinkNode *mergeTwoSortLinkList(struct LinkNode *head1, struct LinkNode *h
 
     while (p1 != NULL)
     {
-        struct LinkNode *node = (struct LinkNode *)malloc(sizeof(struct LinkNode));
+        LinkList *node = (LinkList *)malloc(sizeof(LinkList));
         if (node == NULL)
         {
             return NULL;
@@ -69,7 +69,7 @@ struct LinkNode *mergeTwoSortLinkList(struct LinkNode *head1, struct LinkNode *h
 
     while (p2 != NULL)
     {
-        struct LinkNode *node = (struct LinkNode *)malloc(sizeof(struct LinkNode));
+        LinkList *node = (LinkList *)malloc(sizeof(LinkList));
         if (node == NULL)
         {
             return NULL;
@@ -86,11 +86,11 @@ struct LinkNode *mergeTwoSortLinkList(struct LinkNode *head1, struct LinkNode *h
 /**
  * 不使用新的内存进行合并
  */ 
-struct LinkNode *mergeTwoSortLinkListByLocal(struct LinkNode *l1, struct LinkNode *l2){
+LinkList *mergeTwoSortLinkListByLocal(LinkList *l1, LinkList *l2){
     if (l1 == NULL) return l2;
     if (l2 == NULL) return l1;
 
-    struct LinkNode *start = NULL;
+    LinkList *start = NULL;
     // 确定起始节点
     if (l1->val <= l2->val){
         start = l1;
@@ -100,7 +100,7 @@ struct LinkNode *mergeTwoSortLinkListByLocal(struct LinkNode *l1, struct LinkNod
         l2 = l2->next;
     }
 
-    struct LinkNode *p3 = start;
+    LinkList *p3 = start;
 
     while(l1 != NULL && l1 != NULL){
         if(l1->val <= l2->val){
@@ -121,11 +121,11 @@ struct LinkNode *mergeTwoSortLinkListByLocal(struct LinkNode *l1, struct LinkNod
 /**
  * 使用递归的方式进行合并
  */ 
-struct LinkNode *mergeTwoSortLinkListByRecursive(struct LinkNode *head1, struct LinkNode *head2){
+LinkList *mergeTwoSortLinkListByRecursive(LinkList *head1, LinkList *head2){
     if (head1 == NULL) return head2;
     if (head2 == NULL) return head1;
 
-    struct LinkNode *p = NULL;
+    LinkList *p = NULL;
 
     if(head1->val < head2->val){
         p = head1;
@@ -142,14 +142,14 @@ void testMergeTwoSortLinkList()
 {
     // 创建两个链表
     int arr1[5] = {1, 3, 4, 6, 9};
-    struct LinkNode *head1 = createLinkList(arr1, 5);
+    LinkList *head1 = createLinkList(arr1, 5);
     printLinkList(head1);
 
     int arr2[10] = {2, 3, 4, 4, 6, 8, 9, 10, 30, 34};
-    struct LinkNode *head2 = createLinkList(arr2, 10);
+    LinkList *head2 = createLinkList(arr2, 10);
     printLinkList(head2);
 
-    struct LinkNode *newLink = mergeTwoSortLinkList(head1, head2);
+    LinkList *newLink = mergeTwoSortLinkList(head1, head2);
     printLinkList(newLink);
 
     freeLinkList(head1);
@@ -160,15 +160,15 @@ void testMergeTwoSortLinkListLocal()
 {
     // 创建两个链表
     int arr1[5] = {1, 3, 4, 6, 9};
-    struct LinkNode *head1 = createLinkList(arr1, 5);
+    LinkList *head1 = createLinkList(arr1, 5);
     printLinkList(head1);
 
     int arr2[10] = {2, 3, 4, 4, 6, 8, 9, 10, 30, 34};
-    struct LinkNode *head2 = createLinkList(arr2, 10);
+    LinkList *head2 = createLinkList(arr2, 10);
     printLinkList(head2);
 
-    // struct LinkNode *newLink = mergeTwoSortLinkListByLocal(head1, head2);
-    struct LinkNode *newLink = mergeTwoSortLinkListByRecursive(head1, head2);
+    // LinkList *newLink = mergeTwoSortLinkListByLocal(head1, head2);
+    LinkList *newLink = mergeTwoSortLinkListByRecursive(head1, head2);
 
     printLinkList(newLink);
 

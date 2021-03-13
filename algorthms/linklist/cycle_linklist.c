@@ -12,15 +12,15 @@
  * 之前在面试的时候没有做过这个题，提出了一种增加标志符的方式来判断，在
  * 遍历单链表的时候，记录被访问的时间，然后进行判断，如果已经被访问了，则肯定有环
  */
-int hasCycleInLinkList(struct LinkNode *head){
+int hasCycleInLinkList(LinkList *head){
     int flag = 0;
     // 为空或者只有1个节点
     if(head == NULL || head->next == NULL){
         return flag;
     }
 
-    struct LinkNode *pSlow = head;
-    struct LinkNode *pFast = pSlow->next;
+    LinkList *pSlow = head;
+    LinkList *pFast = pSlow->next;
     while(pSlow != NULL && pFast != NULL){
         if (pSlow == pFast){
             flag = 1;
@@ -36,7 +36,7 @@ int hasCycleInLinkList(struct LinkNode *head){
     // 求出环的长度
     if (flag){
         int lenOfCycle = 1;
-        struct LinkNode *p3 = pSlow->next;
+        LinkList *p3 = pSlow->next;
         while(p3 != pSlow){
             lenOfCycle += 1;
             p3 = p3->next;
@@ -51,7 +51,7 @@ int hasCycleInLinkList(struct LinkNode *head){
  * 求链表的入口节点
  * 《剑指offer》第23题
  */
-struct LinkNode *getEntryNode(struct LinkNode *head){
+LinkList *getEntryNode(LinkList *head){
     // 判断是否有环
     int nodeNum = hasCycleInLinkList(head);
     if(nodeNum == 0){
@@ -59,12 +59,12 @@ struct LinkNode *getEntryNode(struct LinkNode *head){
     }
 
     // 先移动次数为环的长度
-    struct LinkNode *pFast = head;
+    LinkList *pFast = head;
     for(int i = 0; i < nodeNum; ++i){
         pFast = pFast->next;
     }
     // 同时移动pFast和pSlow
-    struct LinkNode *pSlow = head;
+    LinkList *pSlow = head;
     while(pFast != pSlow){
         pFast = pFast->next;
         pSlow = pSlow->next;
@@ -75,7 +75,7 @@ struct LinkNode *getEntryNode(struct LinkNode *head){
 /**
  * 获取有环链表的链表长度
  */
-int getCycleLinkListLength(struct LinkNode *head){
+int getCycleLinkListLength(LinkList *head){
     // 判断是否有环
     int nodeNum = hasCycleInLinkList(head);
     if(nodeNum == 0){
@@ -83,12 +83,12 @@ int getCycleLinkListLength(struct LinkNode *head){
     }
 
     // 先移动次数为环的长度
-    struct LinkNode *pFast = head;
+    LinkList *pFast = head;
     for(int i = 0; i < nodeNum; ++i){
         pFast = pFast->next;
     }
     // 同时移动pFast和pSlow
-    struct LinkNode *pSlow = head;
+    LinkList *pSlow = head;
     int length = nodeNum;
     while(pFast != pSlow){
         ++length; // 长度加一
@@ -102,11 +102,11 @@ int getCycleLinkListLength(struct LinkNode *head){
 /**
  * 创建有环的列表
  */
-struct LinkNode *randomCreateCycle(const int len){
-    struct LinkNode *head = randomCreate(len);
+LinkList *randomCreateCycle(const int len){
+    LinkList *head = randomCreate(len);
 
-    struct LinkNode *p1 = head;
-    struct LinkNode *p2 = head;
+    LinkList *p1 = head;
+    LinkList *p2 = head;
     // 到最后一个节点
     while(p1->next != NULL){
         p1 = p1->next;
@@ -121,7 +121,7 @@ struct LinkNode *randomCreateCycle(const int len){
 
 void testHasCycleInLinkList(){
     // 创建一个有环的链表
-    struct LinkNode *head = randomCreateCycle(20);
+    LinkList *head = randomCreateCycle(20);
     if(head == NULL){
         return ;
     }
@@ -129,7 +129,7 @@ void testHasCycleInLinkList(){
     int flag = hasCycleInLinkList(head);
     if (flag != 0){
         printf("cycle len == %d\n", flag);
-        struct LinkNode *entryNode = getEntryNode(head);
+        LinkList *entryNode = getEntryNode(head);
         printf("node val: %d\n", entryNode->val);
         int length = getCycleLinkListLength(head);
         printf("length : %d\n", length);

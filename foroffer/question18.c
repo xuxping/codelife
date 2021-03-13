@@ -16,10 +16,10 @@ void deleteNode(struct  LinkNode **pHead, struct  LinkNode *pDeleteNode){
         return ;
     }
 
-    struct LinkNode *p = *pHead;
+    LinkList *p = *pHead;
     // 1、pDeleteNode不是尾节点
     if(pDeleteNode->next != NULL){
-        struct LinkNode *pNext = pDeleteNode->next;
+        LinkList *pNext = pDeleteNode->next;
         pDeleteNode->val = pNext->val;
         pDeleteNode->next = pNext->next;
         free(pNext);
@@ -46,16 +46,16 @@ void deleteNode(struct  LinkNode **pHead, struct  LinkNode *pDeleteNode){
  * 删除值重复的节点
  * 由于头结点也有可能被删除，因此传入为pHead的指针的指针，这样可以直接修改头节点
  */ 
-void delelteDuplication(struct LinkNode **pHead){
+void delelteDuplication(LinkList **pHead){
     if(pHead == NULL || *pHead == NULL){
         return ;
     }
 
-    struct LinkNode *pPreNode = NULL;
-    struct LinkNode *pNode = *pHead;
+    LinkList *pPreNode = NULL;
+    LinkList *pNode = *pHead;
 
     while(pNode != NULL){
-        struct LinkNode *pNext = pNode->next;
+        LinkList *pNext = pNode->next;
         int needDelete = 0;
 
         if(pNext != NULL && pNext->val == pNode->val){
@@ -68,7 +68,7 @@ void delelteDuplication(struct LinkNode **pHead){
         }else{
             // 循环删除值重复的节点
             int value = pNode->val;
-            struct LinkNode *pToBeDel = pNode;
+            LinkList *pToBeDel = pNode;
             while(pToBeDel != NULL && pToBeDel->val == value){
                 pNext = pToBeDel->next;
                 free(pToBeDel);
@@ -88,9 +88,9 @@ void delelteDuplication(struct LinkNode **pHead){
 
 }
 
-struct LinkNode* deleteNode(struct LinkNode* head, int val){
+LinkList* deleteNode(LinkList* head, int val){
     if(head == NULL) return NULL;
-    struct LinkNode* p = head;
+    LinkList* p = head;
 
     // 头结点
     if(head->val == val){
@@ -109,7 +109,7 @@ struct LinkNode* deleteNode(struct LinkNode* head, int val){
 
 void test_deleteNode(){
     const int len = 10;
-    struct LinkNode *pHead = randomCreate(len);
+    LinkList *pHead = randomCreate(len);
     struct  LinkNode *pDeleteNode = pHead;
     int i = len >> 1;
     while(i > 0){
@@ -126,7 +126,7 @@ void test_deleteNode(){
 void test_delelteDuplication(){
     const int len = 10;
     int arr[len] = {1,1,2,3,4,4,5,5,7,9};
-    struct LinkNode *pHead = createLinkList(arr, len);
+    LinkList *pHead = createLinkList(arr, len);
     
     printLinkList(pHead);
     delelteDuplication(&pHead);

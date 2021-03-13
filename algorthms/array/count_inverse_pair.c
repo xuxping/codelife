@@ -1,8 +1,8 @@
 // 统计数组中有多少个逆序对
+#include "../utils.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../utils.c"
 
 /**
  * 合并两个有序数组

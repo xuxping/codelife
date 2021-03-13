@@ -8,12 +8,12 @@
  * 两个指针，一个先走K步，然后再同步走
  * 注意：空链表或链表长度小于K
  */
-struct LinkNode *findLastKNode(struct LinkNode *head, const int k){
+LinkList *findLastKNode(LinkList *head, const int k){
     if(head == NULL || k <= 0){
         return NULL;
     }
-    struct LinkNode *p1 = head;
-    struct LinkNode *p2 = head;
+    LinkList *p1 = head;
+    LinkList *p2 = head;
 
     // 向前走k-1步
     int step = k - 1;
@@ -35,12 +35,12 @@ struct LinkNode *findLastKNode(struct LinkNode *head, const int k){
 
 void testFindLastKNode(){
     // 创建一个有环的链表
-    struct LinkNode *head = randomCreate(10);
-    // struct LinkNode *head = NULL;
+    LinkList *head = randomCreate(10);
+    // LinkList *head = NULL;
     const int k = 4;
     // const int k = 11;
 
-    struct LinkNode *res = findLastKNode(head, k);
+    LinkList *res = findLastKNode(head, k);
 
     if(res != NULL){
         printf("last k = %d\n", res->val);
